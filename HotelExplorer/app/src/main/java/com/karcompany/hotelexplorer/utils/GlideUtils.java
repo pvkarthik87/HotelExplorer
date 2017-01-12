@@ -13,6 +13,7 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.karcompany.hotelexplorer.R;
 import com.karcompany.hotelexplorer.logging.DefaultLogger;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -36,25 +37,16 @@ public class GlideUtils {
 		mColourList = Collections.unmodifiableList(colourList);
 	}
 
-	public static void loadImageWithNoCache(final Fragment fragment, String url, final ImageView imageView) {
+	public static void loadImage(Fragment fragment, String url, ImageView gifView) {
 		if (TextUtils.isEmpty(url)) return;
 		Glide
 				.with(fragment)
 				.load(url)
 				.asBitmap()
 				.placeholder(getColorIndex())
-				.skipMemoryCache(true)
 				.error(getColorIndex())
-				.diskCacheStrategy(DiskCacheStrategy.NONE)
-				.centerCrop().into(new BitmapImageViewTarget(imageView) {
-					@Override
-					protected void setResource(Bitmap resource) {
-						RoundedBitmapDrawable circularBitmapDrawable =
-								RoundedBitmapDrawableFactory.create(fragment.getResources(), resource);
-						circularBitmapDrawable.setCircular(true);
-						imageView.setImageDrawable(circularBitmapDrawable);
-					}
-				});
+				.diskCacheStrategy(DiskCacheStrategy.SOURCE)
+				.into(gifView);
 	}
 
 	private static int getColorIndex() {

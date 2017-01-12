@@ -3,6 +3,9 @@ package com.karcompany.hotelexplorer.di.modules;
 import android.content.Context;
 
 import com.karcompany.hotelexplorer.HotelExplorerApplication;
+import com.karcompany.hotelexplorer.networking.ApiRepo;
+import com.karcompany.hotelexplorer.presenters.BrowseHotelsPresenter;
+import com.karcompany.hotelexplorer.presenters.BrowseHotelsPresenterImpl;
 
 import javax.inject.Singleton;
 
@@ -23,5 +26,10 @@ public class ApplicationModule {
 	@Provides @Singleton
 	Context provideApplicationContext() {
 		return this.application;
+	}
+
+	@Provides @Singleton
+	BrowseHotelsPresenter provideBrowseHotelsPresenter(ApiRepo apiRepo) {
+		return new BrowseHotelsPresenterImpl(apiRepo);
 	}
 }

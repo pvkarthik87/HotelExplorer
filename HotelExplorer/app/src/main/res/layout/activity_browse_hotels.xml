@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.karcompany.imageexplorer.views.activities.ImageSearchActivity">
+    tools:context="com.karcompany.hotelexplorer.views.activities.BrowseHotelsActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,11 +14,11 @@
 
         <include layout="@layout/toolbar"/>
 
-        <!--<fragment
+        <fragment
             android:id="@+id/browseUsersFragment"
-            class="com.karcompany.views.fragments.BrowseUsersFragment"
+            class="com.karcompany.hotelexplorer.views.fragments.BrowseHotelsFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>-->
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 </RelativeLayout>
