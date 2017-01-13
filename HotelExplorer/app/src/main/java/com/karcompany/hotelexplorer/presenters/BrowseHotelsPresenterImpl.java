@@ -1,6 +1,7 @@
 package com.karcompany.hotelexplorer.presenters;
 
 import com.karcompany.hotelexplorer.models.GetHotelsApiResponse;
+import com.karcompany.hotelexplorer.models.Hotel;
 import com.karcompany.hotelexplorer.networking.ApiRepo;
 import com.karcompany.hotelexplorer.networking.NetworkError;
 import com.karcompany.hotelexplorer.views.BrowseHotelsView;
@@ -11,7 +12,7 @@ import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- * Created by pvkarthik on 2016-12-12.
+ * Created by pvkarthik on 2017-01-12.
  *
  * Presenter implementation which handles core features.
  */
@@ -19,6 +20,7 @@ import rx.subscriptions.CompositeSubscription;
 public class BrowseHotelsPresenterImpl implements BrowseHotelsPresenter, ApiRepo.GetHotelsApiCallback {
 
 	private BrowseHotelsView mView;
+	private Hotel mSelectedHotel;
 
 	@Inject
 	ApiRepo mApiRepo;
@@ -90,5 +92,10 @@ public class BrowseHotelsPresenterImpl implements BrowseHotelsPresenter, ApiRepo
 		if (mView != null) {
 			mView.onFailure(networkError.getAppErrorMessage());
 		}
+	}
+
+	@Override
+	public void onHotelSelected(Hotel hotel) {
+		mSelectedHotel = hotel;
 	}
 }

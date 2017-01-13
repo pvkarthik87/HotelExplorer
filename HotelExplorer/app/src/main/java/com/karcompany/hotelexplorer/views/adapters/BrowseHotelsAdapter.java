@@ -1,7 +1,7 @@
 package com.karcompany.hotelexplorer.views.adapters;
 
 /**
- * Created by pvkarthik on 2016-12-12.
+ * Created by pvkarthik on 2017-01-12.
  *
  * Recycler view adapter which displays data.
  */
@@ -18,6 +18,8 @@ import com.bumptech.glide.Glide;
 import com.karcompany.hotelexplorer.HotelExplorerApplication;
 import com.karcompany.hotelexplorer.R;
 import com.karcompany.hotelexplorer.config.ViewType;
+import com.karcompany.hotelexplorer.events.BusEvents;
+import com.karcompany.hotelexplorer.events.RxBus;
 import com.karcompany.hotelexplorer.models.GetHotelsApiResponse;
 import com.karcompany.hotelexplorer.models.Hotel;
 import com.karcompany.hotelexplorer.models.Image;
@@ -30,6 +32,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.inject.Inject;
+
 public class BrowseHotelsAdapter extends RecyclerView.Adapter<HotelListItemViewHolder> {
 
 	private Fragment mFragment;
@@ -39,12 +43,17 @@ public class BrowseHotelsAdapter extends RecyclerView.Adapter<HotelListItemViewH
 	private ViewType mCurrentViewType;
 	private Random mRandom = new Random();
 
+	@Inject
+	RxBus mEventBus;
+
 	private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View view) {
 			int itemPosition = (Integer) view.getTag();
 			Long item = mHotelIdList.get(itemPosition);
-			//mBrowseUsersPresenter.onUserSelected(mHotelDataMap.get(item));
+			BusEvents.HotelClickedEvent event =  new BusEvents.HotelClickedEvent();
+			event.hotel = mHotelDataMap.get(item);
+			mEventBus.send(event);
 		}
 	};
 

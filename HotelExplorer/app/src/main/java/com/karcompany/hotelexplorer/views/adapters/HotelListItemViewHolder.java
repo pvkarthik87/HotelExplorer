@@ -1,7 +1,7 @@
 package com.karcompany.hotelexplorer.views.adapters;
 
 /**
- * Created by pvkarthik on 2016-12-12.
+ * Created by pvkarthik on 2017-01-12.
  *
  * View holder.
  */

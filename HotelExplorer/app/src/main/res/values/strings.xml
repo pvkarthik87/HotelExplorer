@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HotelExplorer</string>
+    <string name="hotel_details">Details</string>
 </resources>

@@ -3,9 +3,14 @@ package com.karcompany.hotelexplorer.di.modules;
 import android.content.Context;
 
 import com.karcompany.hotelexplorer.HotelExplorerApplication;
+import com.karcompany.hotelexplorer.events.RxBus;
 import com.karcompany.hotelexplorer.networking.ApiRepo;
 import com.karcompany.hotelexplorer.presenters.BrowseHotelsPresenter;
 import com.karcompany.hotelexplorer.presenters.BrowseHotelsPresenterImpl;
+import com.karcompany.hotelexplorer.presenters.HotelDetailedPresenter;
+import com.karcompany.hotelexplorer.presenters.HotelDetailedPresenterImpl;
+import com.karcompany.hotelexplorer.presenters.HotelImagePresenter;
+import com.karcompany.hotelexplorer.presenters.HotelImagePresenterImpl;
 
 import javax.inject.Singleton;
 
@@ -31,5 +36,20 @@ public class ApplicationModule {
 	@Provides @Singleton
 	BrowseHotelsPresenter provideBrowseHotelsPresenter(ApiRepo apiRepo) {
 		return new BrowseHotelsPresenterImpl(apiRepo);
+	}
+
+	@Provides @Singleton
+	RxBus provideRxBus() {
+		return new RxBus();
+	}
+
+	@Provides @Singleton
+	HotelImagePresenter provideHotelImagePresenter() {
+		return new HotelImagePresenterImpl();
+	}
+
+	@Provides @Singleton
+	HotelDetailedPresenter provideHotelDetailedPresenter() {
+		return new HotelDetailedPresenterImpl();
 	}
 }

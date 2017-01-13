@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:padding="5dp">
+
+	<fragment
+		android:id="@+id/hotelImagesFragment"
+		class="com.karcompany.hotelexplorer.views.fragments.HotelImagesFragment"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/image_fragment_normal_height"/>
+
+	<fragment
+		android:id="@+id/hotelDetailedFragment"
+		class="com.karcompany.hotelexplorer.views.fragments.HotelDetailedFragment"
+		android:layout_below="@id/hotelImagesFragment"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"/>
+
+</RelativeLayout>

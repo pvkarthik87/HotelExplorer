@@ -19,6 +19,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".views.activities.HotelDetailActivity"
+                  android:launchMode="singleTop"/>
+
     </application>
 
 </manifest>
