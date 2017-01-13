@@ -6,23 +6,34 @@ package com.karcompany.hotelexplorer.views.fragments;
  * Cars fragment which displays server data in a recycler view.
  */
 
+import android.content.Intent;
+import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.karcompany.hotelexplorer.R;
 import com.karcompany.hotelexplorer.di.components.ApplicationComponent;
 import com.karcompany.hotelexplorer.logging.DefaultLogger;
+import com.karcompany.hotelexplorer.models.Hotel;
+import com.karcompany.hotelexplorer.models.Location;
+import com.karcompany.hotelexplorer.models.Summary;
 import com.karcompany.hotelexplorer.presenters.HotelDetailedPresenter;
 import com.karcompany.hotelexplorer.views.HotelDetailedView;
+
+import java.util.Locale;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 
 public class HotelDetailedFragment extends BaseFragment implements HotelDetailedView {
 
@@ -30,6 +41,14 @@ public class HotelDetailedFragment extends BaseFragment implements HotelDetailed
 
 	@Inject
 	HotelDetailedPresenter mHotelDetailedPresenter;
+
+	@Bind(R.id.hotelName)
+	TextView mHotelNameView;
+
+	@Bind(R.id.hotelAddress)
+	TextView mHotelAddressView;
+
+	private Hotel mCurrentHotel;
 
 	@Nullable
 	@Override
@@ -90,5 +109,37 @@ public class HotelDetailedFragment extends BaseFragment implements HotelDetailed
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
+	}
+
+	@Override
+	public void updateHotelDetails(Hotel hotel) {
+		if(hotel != null) {
+			mCurrentHotel = hotel;
+			Summary summary = hotel.getSummary();
+			if(summary != null) {
+				if(!TextUtils.isEmpty(summary.getHotelName())) {
+					mHotelNameView.setText(summary.getHotelName());
+				}
+			}
+			Location location = hotel.getLocation();
+			if(location != null) {
+				if(!TextUtils.isEmpty(location.getAddress())) {
+					mHotelAddressView.setText(location.getAddress());
+				}
+			}
+		}
+	}
+
+	@OnClick(R.id.mapView)
+	public void onMapViewClicked() {
+		if(mCurrentHotel != null) {
+			Location location = mCurrentHotel.getLocation();
+			Summary summary = mCurrentHotel.getSummary();
+			if(location != null && summary != null && !TextUtils.isEmpty(summary.getHotelName())) {
+				String uri = String.format(Locale.ENGLISH, "geo:%f,%f?q=%f,%f(%s)", location.getLatitude(), location.getLongitude(), location.getLatitude(), location.getLongitude(), summary.getHotelName());
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+				startActivity(intent);
+			}
+		}
 	}
 }

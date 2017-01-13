@@ -9,6 +9,7 @@ import com.karcompany.hotelexplorer.views.activities.BaseActivity;
 import com.karcompany.hotelexplorer.views.adapters.BrowseHotelsAdapter;
 import com.karcompany.hotelexplorer.views.fragments.BrowseHotelsFragment;
 import com.karcompany.hotelexplorer.views.fragments.HotelDetailedFragment;
+import com.karcompany.hotelexplorer.views.fragments.HotelDetailsFragment;
 import com.karcompany.hotelexplorer.views.fragments.HotelImagesFragment;
 
 import javax.inject.Singleton;
@@ -34,6 +35,8 @@ public interface ApplicationComponent {
 	void inject(HotelImagesFragment hotelImagesFragment);
 
 	void inject(HotelDetailedFragment hotelDetailedFragment);
+
+	void inject(HotelDetailsFragment hotelDetailsFragment);
 	
 	//Exposed to sub-graphs.
 	Context context();

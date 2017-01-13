@@ -2,6 +2,7 @@ package com.karcompany.hotelexplorer.presenters;
 
 import com.karcompany.hotelexplorer.models.Hotel;
 import com.karcompany.hotelexplorer.views.HotelDetailedView;
+import com.karcompany.hotelexplorer.views.HotelDetailsView;
 
 import javax.inject.Inject;
 
@@ -11,19 +12,19 @@ import javax.inject.Inject;
  * Presenter implementation which handles core features.
  */
 
-public class HotelDetailedPresenterImpl implements HotelDetailedPresenter {
+public class HotelDetailsPresenterImpl implements HotelDetailsPresenter {
 
-	private HotelDetailedView mView;
+	private HotelDetailsView mView;
 	private BrowseHotelsPresenter mBrowseHotelsPresenter;
 
 	@Inject
-	public HotelDetailedPresenterImpl(BrowseHotelsPresenter browseHotelsPresenter) {
+	public HotelDetailsPresenterImpl(BrowseHotelsPresenter browseHotelsPresenter) {
 		mBrowseHotelsPresenter = browseHotelsPresenter;
 	}
 
 	@Override
-	public void setView(HotelDetailedView hotelDetailedView) {
-		mView = hotelDetailedView;
+	public void setView(HotelDetailsView hotelDetailsView) {
+		mView = hotelDetailsView;
 	}
 
 	@Override

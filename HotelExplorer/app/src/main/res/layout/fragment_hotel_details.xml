@@ -5,6 +5,50 @@
 	android:layout_height="match_parent"
 	android:padding="5dp">
 
+	<RelativeLayout
+		android:id="@+id/hotelPriceBar"
+		android:layout_width="match_parent"
+		android:layout_height="?attr/actionBarSize"
+		android:layout_alignParentBottom="true"
+		android:background="@color/colorPrimary"
+		android:padding="10dp">
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			android:orientation="horizontal">
+
+			<TextView
+				android:id="@+id/hotelLowRate"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/colorWhite"
+				android:textSize="20sp"
+				android:textStyle="bold" />
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="5dp"
+				android:layout_marginRight="5dp"
+				android:textColor="@color/colorWhite"
+				android:textSize="18sp"
+				android:layout_gravity="center"
+				android:text="@string/price_seperator"/>
+
+			<TextView
+				android:id="@+id/hotelHighRate"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textColor="@color/colorWhite"
+				android:textSize="20sp"
+				android:textStyle="bold" />
+
+		</LinearLayout>
+
+	</RelativeLayout>
+
 	<fragment
 		android:id="@+id/hotelImagesFragment"
 		class="com.karcompany.hotelexplorer.views.fragments.HotelImagesFragment"
@@ -15,6 +59,7 @@
 		android:id="@+id/hotelDetailedFragment"
 		class="com.karcompany.hotelexplorer.views.fragments.HotelDetailedFragment"
 		android:layout_below="@id/hotelImagesFragment"
+		android:layout_above="@id/hotelPriceBar"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"/>
 

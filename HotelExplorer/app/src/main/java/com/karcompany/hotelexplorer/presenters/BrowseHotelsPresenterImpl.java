@@ -98,4 +98,9 @@ public class BrowseHotelsPresenterImpl implements BrowseHotelsPresenter, ApiRepo
 	public void onHotelSelected(Hotel hotel) {
 		mSelectedHotel = hotel;
 	}
+
+	@Override
+	public Hotel getSelectedHotel() {
+		return mSelectedHotel;
+	}
 }

@@ -18,4 +18,6 @@ public interface BrowseHotelsPresenter extends Presenter {
 	boolean isLoading();
 
 	void onHotelSelected(Hotel hotel);
+
+	Hotel getSelectedHotel();
 }

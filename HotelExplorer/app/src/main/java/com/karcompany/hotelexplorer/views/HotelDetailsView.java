@@ -8,7 +8,7 @@ import com.karcompany.hotelexplorer.models.Hotel;
  * View interface which notifies presenter to perform some operations.
  */
 
-public interface HotelDetailedView {
+public interface HotelDetailsView {
 
 	void updateHotelDetails(Hotel hotel);
 

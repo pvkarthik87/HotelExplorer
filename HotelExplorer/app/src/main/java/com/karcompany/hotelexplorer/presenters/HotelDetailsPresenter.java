@@ -1,7 +1,7 @@
 package com.karcompany.hotelexplorer.presenters;
 
 import com.karcompany.hotelexplorer.mvputils.Presenter;
-import com.karcompany.hotelexplorer.views.HotelDetailedView;
+import com.karcompany.hotelexplorer.views.HotelDetailsView;
 
 /**
  * Created by pvkarthik on 2017-01-12.
@@ -10,8 +10,8 @@ import com.karcompany.hotelexplorer.views.HotelDetailedView;
  *
  */
 
-public interface HotelDetailedPresenter extends Presenter {
+public interface HotelDetailsPresenter extends Presenter {
 
-	void setView(HotelDetailedView hotelDetailedView);
+	void setView(HotelDetailsView hotelDetailsView);
 
 }

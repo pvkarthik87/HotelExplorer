@@ -9,6 +9,8 @@ import com.karcompany.hotelexplorer.presenters.BrowseHotelsPresenter;
 import com.karcompany.hotelexplorer.presenters.BrowseHotelsPresenterImpl;
 import com.karcompany.hotelexplorer.presenters.HotelDetailedPresenter;
 import com.karcompany.hotelexplorer.presenters.HotelDetailedPresenterImpl;
+import com.karcompany.hotelexplorer.presenters.HotelDetailsPresenter;
+import com.karcompany.hotelexplorer.presenters.HotelDetailsPresenterImpl;
 import com.karcompany.hotelexplorer.presenters.HotelImagePresenter;
 import com.karcompany.hotelexplorer.presenters.HotelImagePresenterImpl;
 
@@ -44,12 +46,17 @@ public class ApplicationModule {
 	}
 
 	@Provides @Singleton
-	HotelImagePresenter provideHotelImagePresenter() {
-		return new HotelImagePresenterImpl();
+	HotelImagePresenter provideHotelImagePresenter(BrowseHotelsPresenter browseHotelsPresenter) {
+		return new HotelImagePresenterImpl(browseHotelsPresenter);
 	}
 
 	@Provides @Singleton
-	HotelDetailedPresenter provideHotelDetailedPresenter() {
-		return new HotelDetailedPresenterImpl();
+	HotelDetailedPresenter provideHotelDetailedPresenter(BrowseHotelsPresenter browseHotelsPresenter) {
+		return new HotelDetailedPresenterImpl(browseHotelsPresenter);
+	}
+
+	@Provides @Singleton
+	HotelDetailsPresenter provideHotelDetailsPresenter(BrowseHotelsPresenter browseHotelsPresenter) {
+		return new HotelDetailsPresenterImpl(browseHotelsPresenter);
 	}
 }

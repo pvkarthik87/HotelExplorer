@@ -14,9 +14,11 @@ public class HotelImagePresenterImpl implements HotelImagePresenter {
 
 	private HotelImageView mView;
 	private boolean mIsLoading;
+	private BrowseHotelsPresenter mBrowseHotelsPresenter;
 
 	@Inject
-	public HotelImagePresenterImpl() {
+	public HotelImagePresenterImpl(BrowseHotelsPresenter browseHotelsPresenter) {
+
 	}
 
 	@Override
