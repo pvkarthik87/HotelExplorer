@@ -1,7 +1,6 @@
 package com.karcompany.hotelexplorer.presenters;
 
 import com.karcompany.hotelexplorer.models.Hotel;
-import com.karcompany.hotelexplorer.views.HotelDetailedView;
 import com.karcompany.hotelexplorer.views.HotelDetailsView;
 
 import javax.inject.Inject;

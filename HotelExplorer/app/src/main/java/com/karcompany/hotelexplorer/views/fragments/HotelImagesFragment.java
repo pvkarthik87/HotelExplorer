@@ -6,34 +6,63 @@ package com.karcompany.hotelexplorer.views.fragments;
  * Cars fragment which displays server data in a recycler view.
  */
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.karcompany.hotelexplorer.R;
+import com.karcompany.hotelexplorer.config.ViewType;
 import com.karcompany.hotelexplorer.di.components.ApplicationComponent;
+import com.karcompany.hotelexplorer.events.BusEvents;
+import com.karcompany.hotelexplorer.events.RxBus;
 import com.karcompany.hotelexplorer.logging.DefaultLogger;
-import com.karcompany.hotelexplorer.presenters.BrowseHotelsPresenter;
+import com.karcompany.hotelexplorer.models.Hotel;
+import com.karcompany.hotelexplorer.models.Image;
 import com.karcompany.hotelexplorer.presenters.HotelImagePresenter;
 import com.karcompany.hotelexplorer.views.HotelImageView;
+import com.karcompany.hotelexplorer.views.activities.HotelDetailActivity;
+import com.karcompany.hotelexplorer.views.activities.ImageFullScreenActivity;
+import com.karcompany.hotelexplorer.views.adapters.HotelImagesAdapter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.OnClick;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 
 public class HotelImagesFragment extends BaseFragment implements HotelImageView {
 
 	private static final String TAG = DefaultLogger.makeLogTag(HotelImagesFragment.class);
 
 	@Inject
-	BrowseHotelsPresenter mBrowseHotelsPresenter;
+	HotelImagePresenter mHotelImagePresenter;
+
+	@Bind(R.id.hotel_image_list)
+	RecyclerView mHotelImagesRecyclerView;
+
+	private HotelImagesAdapter mAdapter;
 
 	@Inject
-	HotelImagePresenter mHotelImagePresenter;
+	RxBus mEventBus;
+
+	private Subscription mBusSubscription;
+
+	private LinearLayoutManager mLayoutManager;
+	private Hotel mCurrentHotel;
+
+	@Bind(R.id.hotelImagesView)
+	RelativeLayout mHotelImagesLyt;
 
 	@Nullable
 	@Override
@@ -49,10 +78,20 @@ public class HotelImagesFragment extends BaseFragment implements HotelImageView 
 
 	private void setUpUI(Bundle savedInstanceState) {
 		setUpPresenter();
+		setUpRecyclerView();
 	}
 
 	private void setUpPresenter() {
 		mHotelImagePresenter.setView(this);
+	}
+
+	private void setUpRecyclerView() {
+		mLayoutManager = new LinearLayoutManager(
+				getActivity(), LinearLayoutManager.HORIZONTAL, false);
+		mHotelImagesRecyclerView.setLayoutManager(mLayoutManager);
+		mAdapter = new HotelImagesAdapter(this);
+		mAdapter.setFullScreenMode(true);
+		mHotelImagesRecyclerView.setAdapter(mAdapter);
 	}
 
 	@Override
@@ -71,12 +110,40 @@ public class HotelImagesFragment extends BaseFragment implements HotelImageView 
 	public void onResume() {
 		super.onResume();
 		mHotelImagePresenter.onResume();
+		autoUnsubBus();
+		subscribeBus();
+	}
+
+	private void subscribeBus() {
+		mBusSubscription = mEventBus.toObserverable()
+				.observeOn(AndroidSchedulers.mainThread())
+				.subscribe(
+						new Action1<Object>() {
+							@Override
+							public void call(Object o) {
+								handlerBus(o);
+							}
+						}
+				);
+	}
+
+	private void autoUnsubBus() {
+		if (mBusSubscription != null && !mBusSubscription.isUnsubscribed()) {
+			mBusSubscription.unsubscribe();
+		}
+	}
+
+	private void handlerBus(Object o) {
+		if (o instanceof BusEvents.HotelImageClickedEvent) {
+			onHotelImageClicked();
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
 		mHotelImagePresenter.onPause();
+		autoUnsubBus();
 	}
 
 	@Override
@@ -89,10 +156,29 @@ public class HotelImagesFragment extends BaseFragment implements HotelImageView 
 	public void onDestroy() {
 		super.onDestroy();
 		mHotelImagePresenter.onDestroy();
+		mAdapter.clearData();
 	}
 
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
+	}
+
+	@Override
+	public void updateHotelImages(Hotel hotel) {
+		if(hotel != null) {
+			mCurrentHotel = hotel;
+			List<Image> hotelImages = hotel.getImage();
+			mAdapter.addImages(hotelImages);
+		}
+	}
+
+	@OnClick(R.id.fullScreenBtn)
+	public void onFullScreenBtnClicked() {
+		onHotelImageClicked();
+	}
+
+	private void onHotelImageClicked() {
+		getActivity().finish();
 	}
 }

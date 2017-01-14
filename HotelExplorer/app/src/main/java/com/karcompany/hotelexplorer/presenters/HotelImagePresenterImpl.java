@@ -1,5 +1,7 @@
 package com.karcompany.hotelexplorer.presenters;
 
+import com.karcompany.hotelexplorer.models.Hotel;
+import com.karcompany.hotelexplorer.models.Image;
 import com.karcompany.hotelexplorer.views.HotelImageView;
 
 import javax.inject.Inject;
@@ -13,12 +15,12 @@ import javax.inject.Inject;
 public class HotelImagePresenterImpl implements HotelImagePresenter {
 
 	private HotelImageView mView;
-	private boolean mIsLoading;
 	private BrowseHotelsPresenter mBrowseHotelsPresenter;
+	private Image mSelectedHotelImage;
 
 	@Inject
 	public HotelImagePresenterImpl(BrowseHotelsPresenter browseHotelsPresenter) {
-
+		mBrowseHotelsPresenter = browseHotelsPresenter;
 	}
 
 	@Override
@@ -50,12 +52,18 @@ public class HotelImagePresenterImpl implements HotelImagePresenter {
 		mView = null;
 	}
 
-	@Override
-	public boolean isLoading() {
-		return mIsLoading;
-	}
 
 	private void loadImages() {
-		mIsLoading = true;
+		Hotel hotel = mBrowseHotelsPresenter.getSelectedHotel();
+		if(hotel != null) {
+			if(mView != null) {
+				mView.updateHotelImages(hotel);
+			}
+		}
+	}
+
+	@Override
+	public void onHotelImageSelected(Image hotelImage) {
+		mSelectedHotelImage = hotelImage;
 	}
 }

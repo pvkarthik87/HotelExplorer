@@ -8,6 +8,7 @@ package com.karcompany.hotelexplorer.views.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -29,6 +30,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 	protected boolean isActivityVisible;
 
+	@Nullable
 	@Bind(R.id.mainToolbar)
 	Toolbar mToolbar;
 
@@ -100,5 +102,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 		if (item.getItemId() == android.R.id.home)
 			finish();
 		return super.onOptionsItemSelected(item);
+	}
+
+	public void hideToolbar() {
+		if(mToolbar != null) {
+			mToolbar.setVisibility(View.GONE);
+		}
 	}
 }

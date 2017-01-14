@@ -2,8 +2,7 @@
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:padding="5dp">
+	android:layout_height="match_parent">
 
 	<RelativeLayout
 		android:id="@+id/hotelPriceBar"
@@ -49,18 +48,114 @@
 
 	</RelativeLayout>
 
-	<fragment
-		android:id="@+id/hotelImagesFragment"
-		class="com.karcompany.hotelexplorer.views.fragments.HotelImagesFragment"
+	<android.support.v7.widget.CardView
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:card_view="http://schemas.android.com/apk/res-auto"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/image_fragment_normal_height"/>
-
-	<fragment
-		android:id="@+id/hotelDetailedFragment"
-		class="com.karcompany.hotelexplorer.views.fragments.HotelDetailedFragment"
-		android:layout_below="@id/hotelImagesFragment"
+		android:layout_height="match_parent"
 		android:layout_above="@id/hotelPriceBar"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"/>
+		card_view:cardElevation="2dp"
+		card_view:cardPreventCornerOverlap="true"
+		card_view:cardUseCompatPadding="true"
+		card_view:cardCornerRadius="3dp">
+
+		<android.support.v4.widget.NestedScrollView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent">
+
+					<!--<fragment
+						android:id="@+id/hotelImagesFragment"
+						class="com.karcompany.hotelexplorer.views.fragments.HotelImagesFragment"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"/>-->
+
+				<RelativeLayout
+					android:id="@+id/hotelImagesLyt"
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/image_fragment_normal_height">
+
+					<android.support.v7.widget.RecyclerView
+						android:id="@+id/hotel_image_list"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:scrollbars="horizontal" />
+
+					<ImageView
+						android:id="@+id/fullScreenBtn"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_alignParentBottom="true"
+						android:layout_alignParentRight="true"
+						android:layout_margin="5dp"
+						android:src="@drawable/ic_fullscreen_white_36dp"/>
+
+				</RelativeLayout>
+
+				<LinearLayout
+					android:id="@+id/hotelDetailsLyt"
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:layout_below="@id/hotelImagesLyt"
+					android:orientation="vertical">
+
+					<TextView
+						android:id="@+id/hotelName"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:textColor="@color/neutral_medium_dark"
+						android:textSize="20sp"
+						android:textStyle="bold"
+						android:layout_marginTop="20dp"
+						android:layout_marginBottom="20dp"
+						android:layout_marginLeft="5dp"
+						android:layout_marginRight="5dp"/>
+
+					<View
+						android:layout_width="match_parent"
+						android:layout_height="3dp"
+						android:background="@color/neutral_medium_soft_dark"/>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						android:layout_marginTop="20dp"
+						android:layout_marginBottom="20dp"
+						android:layout_marginLeft="5dp"
+						android:layout_marginRight="5dp">
+
+						<ImageView
+							android:id="@+id/mapView"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:src="@drawable/ic_map_black_36dp"/>
+
+						<TextView
+							android:id="@+id/hotelAddress"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginLeft="5dp"
+							android:layout_gravity="center_vertical"
+							android:textColor="@color/neutral_medium_dark"
+							android:textSize="20sp"
+							android:textStyle="bold" />
+
+					</LinearLayout>
+
+					<View
+						android:layout_width="match_parent"
+						android:layout_height="3dp"
+						android:background="@color/neutral_medium_soft_dark"/>
+
+				</LinearLayout>
+
+			</RelativeLayout>
+
+		</android.support.v4.widget.NestedScrollView>
+	</android.support.v7.widget.CardView>
 
 </RelativeLayout>

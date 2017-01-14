@@ -1,6 +1,7 @@
 package com.karcompany.hotelexplorer.views;
 
 import com.karcompany.hotelexplorer.models.GetHotelsApiResponse;
+import com.karcompany.hotelexplorer.models.Hotel;
 
 /**
  * Created by pvkarthik on 2017-01-12.
@@ -9,5 +10,7 @@ import com.karcompany.hotelexplorer.models.GetHotelsApiResponse;
  */
 
 public interface HotelImageView {
+
+	void updateHotelImages(Hotel hotel);
 
 }

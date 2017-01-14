@@ -7,8 +7,6 @@ import com.karcompany.hotelexplorer.events.RxBus;
 import com.karcompany.hotelexplorer.networking.ApiRepo;
 import com.karcompany.hotelexplorer.presenters.BrowseHotelsPresenter;
 import com.karcompany.hotelexplorer.presenters.BrowseHotelsPresenterImpl;
-import com.karcompany.hotelexplorer.presenters.HotelDetailedPresenter;
-import com.karcompany.hotelexplorer.presenters.HotelDetailedPresenterImpl;
 import com.karcompany.hotelexplorer.presenters.HotelDetailsPresenter;
 import com.karcompany.hotelexplorer.presenters.HotelDetailsPresenterImpl;
 import com.karcompany.hotelexplorer.presenters.HotelImagePresenter;
@@ -48,11 +46,6 @@ public class ApplicationModule {
 	@Provides @Singleton
 	HotelImagePresenter provideHotelImagePresenter(BrowseHotelsPresenter browseHotelsPresenter) {
 		return new HotelImagePresenterImpl(browseHotelsPresenter);
-	}
-
-	@Provides @Singleton
-	HotelDetailedPresenter provideHotelDetailedPresenter(BrowseHotelsPresenter browseHotelsPresenter) {
-		return new HotelDetailedPresenterImpl(browseHotelsPresenter);
 	}
 
 	@Provides @Singleton

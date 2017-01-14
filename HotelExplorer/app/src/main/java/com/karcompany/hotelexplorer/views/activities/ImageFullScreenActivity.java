@@ -7,21 +7,14 @@ package com.karcompany.hotelexplorer.views.activities;
  */
 
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.karcompany.hotelexplorer.R;
 import com.karcompany.hotelexplorer.di.HasComponent;
 import com.karcompany.hotelexplorer.di.components.ApplicationComponent;
-import com.karcompany.hotelexplorer.events.BusEvents;
-import com.karcompany.hotelexplorer.events.RxBus;
-import com.karcompany.hotelexplorer.models.Image;
 
-import javax.inject.Inject;
-
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-
-public class HotelDetailActivity extends BaseActivity implements HasComponent<ApplicationComponent> {
+public class ImageFullScreenActivity extends BaseActivity implements HasComponent<ApplicationComponent> {
 
 	@Override
 	protected void injectComponent(ApplicationComponent component) {
@@ -31,8 +24,9 @@ public class HotelDetailActivity extends BaseActivity implements HasComponent<Ap
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_hotel_detail);
-		setTitle(getString(R.string.hotel_details));
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		setContentView(R.layout.activity_image_full_screen);
 	}
 
 	@Override

@@ -18,7 +18,8 @@
 			android:id="@+id/hotelImage"
 			android:layout_width="48dp"
 			android:layout_height="48dp"
-			android:scaleType="fitCenter"/>
+			android:scaleType="fitCenter"
+			android:background="@color/neutral_medium_dark" />
 
 		<TextView
 			android:id="@+id/hotelName"

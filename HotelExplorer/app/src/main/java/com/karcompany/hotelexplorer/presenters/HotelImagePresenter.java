@@ -1,5 +1,6 @@
 package com.karcompany.hotelexplorer.presenters;
 
+import com.karcompany.hotelexplorer.models.Image;
 import com.karcompany.hotelexplorer.mvputils.Presenter;
 import com.karcompany.hotelexplorer.views.HotelImageView;
 
@@ -14,6 +15,6 @@ public interface HotelImagePresenter extends Presenter {
 
 	void setView(HotelImageView hotelImageView);
 
-	boolean isLoading();
+	void onHotelImageSelected(Image hotelImage);
 
 }

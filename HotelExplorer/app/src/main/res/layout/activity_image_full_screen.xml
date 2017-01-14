@@ -5,18 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.karcompany.hotelexplorer.views.activities.HotelDetailActivity">
+    tools:context="com.karcompany.hotelexplorer.views.activities.ImageFullScreenActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/toolbar"/>
-
         <fragment
-            android:id="@+id/hotelDetailFragment"
-            class="com.karcompany.hotelexplorer.views.fragments.HotelDetailsFragment"
+            android:id="@+id/hotelImagesFragment"
+            class="com.karcompany.hotelexplorer.views.fragments.HotelImagesFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

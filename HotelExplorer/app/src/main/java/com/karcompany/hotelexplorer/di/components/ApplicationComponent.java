@@ -6,9 +6,11 @@ import com.karcompany.hotelexplorer.HotelExplorerApplication;
 import com.karcompany.hotelexplorer.di.modules.ApplicationModule;
 import com.karcompany.hotelexplorer.networking.NetworkModule;
 import com.karcompany.hotelexplorer.views.activities.BaseActivity;
+import com.karcompany.hotelexplorer.views.activities.HotelDetailActivity;
+import com.karcompany.hotelexplorer.views.activities.ImageFullScreenActivity;
 import com.karcompany.hotelexplorer.views.adapters.BrowseHotelsAdapter;
+import com.karcompany.hotelexplorer.views.adapters.HotelImagesAdapter;
 import com.karcompany.hotelexplorer.views.fragments.BrowseHotelsFragment;
-import com.karcompany.hotelexplorer.views.fragments.HotelDetailedFragment;
 import com.karcompany.hotelexplorer.views.fragments.HotelDetailsFragment;
 import com.karcompany.hotelexplorer.views.fragments.HotelImagesFragment;
 
@@ -34,9 +36,13 @@ public interface ApplicationComponent {
 
 	void inject(HotelImagesFragment hotelImagesFragment);
 
-	void inject(HotelDetailedFragment hotelDetailedFragment);
-
 	void inject(HotelDetailsFragment hotelDetailsFragment);
+
+	void inject(HotelImagesAdapter hotelImagesAdapter);
+
+	void inject(HotelDetailActivity hotelDetailActivity);
+
+	void inject(ImageFullScreenActivity imageFullScreenActivity);
 	
 	//Exposed to sub-graphs.
 	Context context();

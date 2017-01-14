@@ -90,7 +90,7 @@ public class BrowseHotelsAdapter extends RecyclerView.Adapter<HotelListItemViewH
 	@Override
 	public void onBindViewHolder(HotelListItemViewHolder holder, int position) {
 		if(mCurrentViewType == ViewType.STAGGERED) {
-			holder.itemView.getLayoutParams().height = getRandomIntInRange(250,128);
+			holder.hotelImgView.getLayoutParams().height = getRandomIntInRange(300,200);
 		}
 		holder.hotelNameTxtView.setText("");
 		Glide.clear(holder.hotelImgView);
@@ -107,9 +107,9 @@ public class BrowseHotelsAdapter extends RecyclerView.Adapter<HotelListItemViewH
 					GlideUtils.loadImage(mFragment, hotelImages.get(0).getUrl(), holder.hotelImgView);
 				}
 			}
+			holder.itemView.setTag(position);
+			holder.itemView.setOnClickListener(mOnClickListener);
 		}
-		holder.itemView.setTag(position);
-		holder.itemView.setOnClickListener(mOnClickListener);
 	}
 
 	// Custom method to get a random number between a range
