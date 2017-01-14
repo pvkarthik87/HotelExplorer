@@ -7,6 +7,8 @@ import rx.subjects.Subject;
 
 /**
  * Created by pvkarthik on 2017-01-12.
+ *
+ * Using Rx as EventBus
  */
 
 public class RxBus {

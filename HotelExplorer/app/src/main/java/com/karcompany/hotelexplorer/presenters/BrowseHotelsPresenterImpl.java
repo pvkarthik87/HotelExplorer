@@ -14,7 +14,7 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * Created by pvkarthik on 2017-01-12.
  *
- * Presenter implementation which handles core features.
+ * Presenter implementation which handles core features (fetches hotels from server).
  */
 
 public class BrowseHotelsPresenterImpl implements BrowseHotelsPresenter, ApiRepo.GetHotelsApiCallback {
@@ -65,11 +65,6 @@ public class BrowseHotelsPresenterImpl implements BrowseHotelsPresenter, ApiRepo
 		if(subscriptions != null) {
 			subscriptions.unsubscribe();
 		}
-	}
-
-	@Override
-	public boolean isLoading() {
-		return mIsLoading;
 	}
 
 	private void loadHotels() {

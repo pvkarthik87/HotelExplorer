@@ -4,6 +4,8 @@ package com.karcompany.hotelexplorer.views.activities;
  * Created by pvkarthik on 2017-01-12.
  *
  * Initial launch activity which will get displayed on first launch of application.
+ * Displays list of hotels.
+ *
  */
 
 import android.os.Bundle;

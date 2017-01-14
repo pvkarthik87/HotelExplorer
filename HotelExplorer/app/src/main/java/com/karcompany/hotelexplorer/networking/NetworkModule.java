@@ -3,7 +3,7 @@ package com.karcompany.hotelexplorer.networking;
 /**
  * Created by pvkarthik on 2017-01-12.
  *
- * Dagger module which is responsible for providing objects injected variables.
+ * Dagger module which is responsible for providing objects to injected variables.
  */
 
 import com.karcompany.hotelexplorer.HotelExplorerApplication;

@@ -15,6 +15,4 @@ public interface HotelImagePresenter extends Presenter {
 
 	void setView(HotelImageView hotelImageView);
 
-	void onHotelImageSelected(Image hotelImage);
-
 }

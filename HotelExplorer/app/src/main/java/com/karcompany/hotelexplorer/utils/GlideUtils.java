@@ -20,6 +20,8 @@ import java.util.List;
 
 /**
  * Created by pvkarthik on 2017-01-12.
+ *
+ * Used to load images.
  */
 public class GlideUtils {
 

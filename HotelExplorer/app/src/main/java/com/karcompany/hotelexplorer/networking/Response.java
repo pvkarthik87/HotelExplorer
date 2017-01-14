@@ -3,7 +3,6 @@ package com.karcompany.hotelexplorer.networking;
 /**
  * Created by pvkarthik on 2017-01-12.
  *
- * JSON POJO.
  */
 
 import com.google.gson.annotations.SerializedName;

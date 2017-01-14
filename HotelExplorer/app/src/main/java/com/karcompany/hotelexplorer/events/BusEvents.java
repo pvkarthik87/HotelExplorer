@@ -5,6 +5,8 @@ import com.karcompany.hotelexplorer.models.Image;
 
 /**
  * Created by pvkarthik on 2017-01-12.
+ *
+ * Bus Events
  */
 
 public class BusEvents {

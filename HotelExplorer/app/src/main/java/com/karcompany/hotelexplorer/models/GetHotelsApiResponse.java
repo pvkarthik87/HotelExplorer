@@ -1,4 +1,8 @@
-
+/**
+ * Created by pvkarthik on 2017-01-12.
+ *
+ * This is POJO class corresponding to server response (JSON).
+ */
 package com.karcompany.hotelexplorer.models;
 
 import java.util.List;

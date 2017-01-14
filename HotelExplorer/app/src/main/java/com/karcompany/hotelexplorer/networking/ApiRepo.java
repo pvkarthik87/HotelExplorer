@@ -32,6 +32,9 @@ public class ApiRepo {
 		this.mRestService = restService;
 	}
 
+	/*
+	    Retrives hotels from server
+	 */
 	public Subscription getHotels(final GetHotelsApiCallback callback) {
 		return mRestService.getHotels()
 				.observeOn(AndroidSchedulers.mainThread())

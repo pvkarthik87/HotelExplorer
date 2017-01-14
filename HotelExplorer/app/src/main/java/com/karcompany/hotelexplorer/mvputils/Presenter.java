@@ -3,7 +3,7 @@ package com.karcompany.hotelexplorer.mvputils;
 /**
  * Created by pvkarthik on 2017-01-12.
  *
- *Interface representing a Presenter in a model view presenter (MVP) pattern.
+ * Interface representing a Presenter in a model view presenter (MVP) pattern.
  */
 public interface Presenter {
   /**

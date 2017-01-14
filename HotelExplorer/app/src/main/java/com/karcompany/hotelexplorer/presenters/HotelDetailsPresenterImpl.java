@@ -8,7 +8,7 @@ import javax.inject.Inject;
 /**
  * Created by pvkarthik on 2017-01-12.
  *
- * Presenter implementation which handles core features.
+ * Presenter implementation which handles core features (displays detailed hotel info).
  */
 
 public class HotelDetailsPresenterImpl implements HotelDetailsPresenter {

@@ -9,7 +9,7 @@ import javax.inject.Inject;
 /**
  * Created by pvkarthik on 2017-01-12.
  *
- * Presenter implementation which handles core features.
+ * Presenter implementation which handles core features (Fullscreen images).
  */
 
 public class HotelImagePresenterImpl implements HotelImagePresenter {
@@ -60,10 +60,5 @@ public class HotelImagePresenterImpl implements HotelImagePresenter {
 				mView.updateHotelImages(hotel);
 			}
 		}
-	}
-
-	@Override
-	public void onHotelImageSelected(Image hotelImage) {
-		mSelectedHotelImage = hotelImage;
 	}
 }

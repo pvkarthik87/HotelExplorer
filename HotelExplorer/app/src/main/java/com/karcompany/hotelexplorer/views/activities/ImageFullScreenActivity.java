@@ -3,7 +3,7 @@ package com.karcompany.hotelexplorer.views.activities;
 /**
  * Created by pvkarthik on 2017-01-12.
  *
- * Initial launch activity which will get displayed on first launch of application.
+ * Shows hotel images in fullscreen mode.
  */
 
 import android.os.Bundle;

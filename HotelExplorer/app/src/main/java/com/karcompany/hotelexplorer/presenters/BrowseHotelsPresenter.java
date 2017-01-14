@@ -7,15 +7,13 @@ import com.karcompany.hotelexplorer.views.BrowseHotelsView;
 /**
  * Created by pvkarthik on 2017-01-12.
  *
- * Presenter interface.
+ * Presenter interface which helps in getting in hotels from server.
  *
  */
 
 public interface BrowseHotelsPresenter extends Presenter {
 
 	void setView(BrowseHotelsView browseHotelsView);
-
-	boolean isLoading();
 
 	void onHotelSelected(Hotel hotel);
 

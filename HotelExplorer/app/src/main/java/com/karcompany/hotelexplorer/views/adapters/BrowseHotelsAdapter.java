@@ -3,7 +3,7 @@ package com.karcompany.hotelexplorer.views.adapters;
 /**
  * Created by pvkarthik on 2017-01-12.
  *
- * Recycler view adapter which displays data.
+ * Recycler view adapter which displays hotel list data.
  */
 
 import android.content.Context;

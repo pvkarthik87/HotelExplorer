@@ -3,7 +3,7 @@ package com.karcompany.hotelexplorer.views.fragments;
 /**
  * Created by pvkarthik on 2017-01-12.
  *
- * Cars fragment which displays server data in a recycler view.
+ * Displays detailed info about a hotel.
  */
 
 import android.content.Intent;
