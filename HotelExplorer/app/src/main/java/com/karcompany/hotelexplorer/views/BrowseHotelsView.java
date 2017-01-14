@@ -17,4 +17,6 @@ public interface BrowseHotelsView {
 
 	void onFailure(String errorMsg);
 
+	void onLoadStateChanged(boolean isLoading);
+
 }

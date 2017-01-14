@@ -74,6 +74,9 @@ public class BrowseHotelsPresenterImpl implements BrowseHotelsPresenter, ApiRepo
 
 	private void loadHotels() {
 		mIsLoading = true;
+		if(mView != null) {
+			mView.onLoadStateChanged(mIsLoading);
+		}
 		Subscription subscription = mApiRepo.getHotels(this);
 		subscriptions.add(subscription);
 	}
@@ -82,6 +85,7 @@ public class BrowseHotelsPresenterImpl implements BrowseHotelsPresenter, ApiRepo
 	public void onSuccess(GetHotelsApiResponse response) {
 		mIsLoading = false;
 		if (mView != null) {
+			mView.onLoadStateChanged(mIsLoading);
 			mView.onDataReceived(response);
 		}
 	}
@@ -90,6 +94,7 @@ public class BrowseHotelsPresenterImpl implements BrowseHotelsPresenter, ApiRepo
 	public void onError(NetworkError networkError) {
 		mIsLoading = false;
 		if (mView != null) {
+			mView.onLoadStateChanged(mIsLoading);
 			mView.onFailure(networkError.getAppErrorMessage());
 		}
 	}

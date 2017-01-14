@@ -27,6 +27,7 @@ import com.karcompany.hotelexplorer.models.Summary;
 import com.karcompany.hotelexplorer.utils.GlideUtils;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -146,6 +147,23 @@ public class BrowseHotelsAdapter extends RecyclerView.Adapter<HotelListItemViewH
 		}
 	}
 
+	public void addData(ArrayList<Hotel> hotelArrayList) {
+		if(hotelArrayList != null) {
+			for (Hotel hotel:hotelArrayList) {
+				mHotelDataMap.put(hotel.getHotelId(), hotel);
+			}
+			int oldSize = mHotelIdList.size();
+			mHotelIdList.clear();
+			mHotelIdList.addAll(mHotelDataMap.keySet());
+			int newSize = mHotelIdList.size();
+			if(oldSize > 0) {
+				notifyItemRangeInserted(oldSize, newSize - oldSize);
+			} else {
+				notifyDataSetChanged();
+			}
+		}
+	}
+
 	public void clearData() {
 		mHotelIdList.clear();
 		mHotelDataMap.clear();
@@ -153,5 +171,15 @@ public class BrowseHotelsAdapter extends RecyclerView.Adapter<HotelListItemViewH
 
 	public void setViewMode(ViewType viewType) {
 		mCurrentViewType = viewType;
+	}
+
+	public ArrayList<Hotel> getHotelList() {
+		ArrayList<Hotel> hotelArrayList = new ArrayList<>();
+		Iterator<Map.Entry<Long, Hotel>> iterator = mHotelDataMap.entrySet().iterator();
+		while (iterator.hasNext()) {
+			Map.Entry<Long, Hotel> entry = iterator.next();
+			hotelArrayList.add(entry.getValue());
+		}
+		return hotelArrayList;
 	}
 }

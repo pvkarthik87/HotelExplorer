@@ -32,6 +32,8 @@ import com.karcompany.hotelexplorer.views.BrowseHotelsView;
 import com.karcompany.hotelexplorer.views.activities.HotelDetailActivity;
 import com.karcompany.hotelexplorer.views.adapters.BrowseHotelsAdapter;
 
+import java.util.ArrayList;
+
 import javax.inject.Inject;
 
 import butterknife.Bind;
@@ -44,7 +46,10 @@ public class BrowseHotelsFragment extends BaseFragment implements BrowseHotelsVi
 
 	private static final String TAG = DefaultLogger.makeLogTag(BrowseHotelsFragment.class);
 
+	private static final int REQUEST_CODE_DETAIL_HOTEL = 0x026;
+
 	private static final String CURRENT_VIEW_TYPE = "CURRENT_VIEW_TYPE";
+	private static final String CURRENT_HOTEL_LIST = "CURRENT_HOTEL_LIST";
 
 	@Bind(R.id.hotel_list)
 	RecyclerView mHotelsRecyclerView;
@@ -63,6 +68,11 @@ public class BrowseHotelsFragment extends BaseFragment implements BrowseHotelsVi
 
 	private Subscription mBusSubscription;
 
+	private boolean mIsComingBack;
+
+	@Bind(R.id.progressView)
+	View mLoadProgressView;
+
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -76,13 +86,21 @@ public class BrowseHotelsFragment extends BaseFragment implements BrowseHotelsVi
 	}
 
 	private void setUpUI(Bundle savedInstanceState) {
-		if (savedInstanceState != null && savedInstanceState.containsKey(CURRENT_VIEW_TYPE)) {
-			mCurrentViewType = ViewType.get(savedInstanceState.getString(CURRENT_VIEW_TYPE, ViewType.LIST.toString()));
+		if (savedInstanceState != null) {
+			if(savedInstanceState.containsKey(CURRENT_VIEW_TYPE)) {
+				mCurrentViewType = ViewType.get(savedInstanceState.getString(CURRENT_VIEW_TYPE, ViewType.LIST.toString()));
+			}
 		}
 		setUpPresenter();
 		setUpFabBtn();
 		mAdapter = new BrowseHotelsAdapter(this);
 		setUpRecyclerView();
+		if (savedInstanceState != null) {
+			if(savedInstanceState.containsKey(CURRENT_HOTEL_LIST)) {
+				ArrayList<Hotel> hotelArrayList = savedInstanceState.getParcelableArrayList(CURRENT_HOTEL_LIST);
+				mAdapter.addData(hotelArrayList);
+			}
+		}
 	}
 
 	private void setUpPresenter() {
@@ -124,7 +142,11 @@ public class BrowseHotelsFragment extends BaseFragment implements BrowseHotelsVi
 	@Override
 	public void onStart() {
 		super.onStart();
-		mBrowseHotelsPresenter.onStart();
+		if(!mIsComingBack) {
+			mBrowseHotelsPresenter.onStart();
+		} else {
+			mIsComingBack = false;
+		}
 	}
 
 	@Override
@@ -242,18 +264,30 @@ public class BrowseHotelsFragment extends BaseFragment implements BrowseHotelsVi
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString(CURRENT_VIEW_TYPE, mCurrentViewType.getCode());
-		outState.putString(CURRENT_VIEW_TYPE, mCurrentViewType.getCode());
+		outState.putParcelableArrayList(CURRENT_HOTEL_LIST, mAdapter.getHotelList());
 	}
 
 	private void onHotelClicked(Hotel hotel) {
 		mBrowseHotelsPresenter.onHotelSelected(hotel);
 		Intent intent = new Intent(getActivity(), HotelDetailActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		startActivity(intent);
+		startActivityForResult(intent, REQUEST_CODE_DETAIL_HOTEL);
 	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == REQUEST_CODE_DETAIL_HOTEL) {
+			mIsComingBack = true;
+		}
+	}
+
+	@Override
+	public void onLoadStateChanged(boolean isLoading) {
+		if(isLoading) {
+			mLoadProgressView.setVisibility(View.VISIBLE);
+		} else {
+			mLoadProgressView.setVisibility(View.GONE);
+		}
 	}
 }
